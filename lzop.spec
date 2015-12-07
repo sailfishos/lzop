@@ -2,7 +2,7 @@ Name:           lzop
 Version:        1.03
 Release:        0
 Summary:        The fastest compressor and decompressor around
-License:        GPL-2.0+
+License:        GPLv2+
 Group:          Development/Tools
 Source:         lzop-%{version}.tar.gz
 Source1:        _src
