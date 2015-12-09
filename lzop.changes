@@ -1,2 +1,5 @@
+* Wed Dec 09 2015 Matti Kosola <matti.kosola@jollamobile.com> - 1.03-1
+- Unify open source licenses. Contributes to JB#33648
+
 * Tue Apr 30 2013 Matti Kosola <matti.kosola@jollamobile.com> - 1.03
 - Initial Mer packaging
