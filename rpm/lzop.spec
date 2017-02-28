@@ -5,7 +5,6 @@ Summary:        The fastest compressor and decompressor around
 License:        GPLv2+
 Group:          Development/Tools
 Source:         lzop-%{version}.tar.gz
-Source1:        _src
 Url:            http://www.lzop.org
 BuildRequires:  autoconf
 BuildRequires:  automake
