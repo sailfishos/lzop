@@ -1,6 +1,6 @@
 #! /bin/sh
-# vi:ts=4:et
-# Copyright (C) 1996-2010 Markus F.X.J. Oberhumer
+## vim:set ts=4 sw=4 et:
+# Copyright (C) 1996-2017 Markus F.X.J. Oberhumer
 
 rm -f *.o lzop.out
 

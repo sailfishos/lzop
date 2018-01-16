@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -328,3 +328,5 @@ static const unsigned char compressed_frames[3522] = {
 0xb1, 0x20, 0x10, 0x05, 0x11, 0xcb, 0xb0, 0x18, 0x08, 0x30, 0x84, 0x20,
 0x05, 0x6c, 0x2c, 0x11, 0x00, 0x00
 };
+
+/* vim:set ts=4 sw=4 et: */

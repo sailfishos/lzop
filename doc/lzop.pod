@@ -297,14 +297,14 @@ Do not delete input files. This is the default.
 
 =item -U, --unlink, --delete
 
-Delete input files after succesfull compression or
+Delete input files after successful compression or
 decompression. Use this option to make lzop behave
 like B<gzip> and B<bzip2>.
 Note that explicitly giving B<-k> overrides B<-U>.
 
 =item --crc32
 
-Use a crc32 checksum instead of a adler32 checksum.
+Use a crc32 checksum instead of an adler32 checksum.
 
 =item --no-warn
 
@@ -511,7 +511,7 @@ lzop will tell you.
 
 =head1 SEE ALSO
 
-B<bzip2>(1), B<gzip>(1), B<tar>(1)
+B<bzip2>(1), B<gzip>(1), B<tar>(1), B<xz>(1)
 
 Precompiled binaries for some platforms are available
 from the lzop home page.
@@ -552,8 +552,7 @@ http://www.oberhumer.com/opensource/lzop/
 =head1 COPYRIGHT
 
 lzop and the LZO library are
-Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-2006, 2007, 2008, 2009, 2010 by Markus Franz Xaver Johannes Oberhumer.
+Copyright (C) 1996-2017 Markus Franz Xaver Oberhumer <markus@oberhumer.com>.
 All Rights Reserved.
 
 lzop and the LZO library are distributed under the terms

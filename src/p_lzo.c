@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -158,7 +158,7 @@ void lzo_init_compress_header(header_t *h)
 #  define ALIGN_SIZE    1
 #endif
 
-/* LZO may expand uncompressible data by a small amount */
+/* LZO may expand incompressible data by a small amount */
 #define MAX_COMPRESSED_SIZE(x)  ((x) + (x) / 16 + 64 + 3)
 
 
@@ -192,7 +192,7 @@ static lzo_bool alloc_mem(lzo_uint32 s1, lzo_uint32 s2, lzo_uint32 w)
 **************************************************************************/
 
 /* maybe make this an option ? */
-static const lzo_uint block_size = BLOCK_SIZE;
+static const lzo_uint32 block_size = BLOCK_SIZE;
 
 lzo_bool lzo_enter(const header_t *h)
 {
@@ -300,7 +300,7 @@ lzo_bool lzo_compress(file_t *fip, file_t *fop, const header_t *h)
     {
         /* read a block */
         l = read_buf(fip, b1, block_size);
-        src_len = (l > 0 ? l : 0);
+        src_len = (lzo_uint32) (l > 0 ? l : 0);
 
         /* write uncompressed block size */
         write32(fop,src_len);
@@ -352,9 +352,9 @@ lzo_bool lzo_compress(file_t *fip, file_t *fop, const header_t *h)
 
         /* write compressed block size */
         if (dst_len < src_len)
-            write32(fop,dst_len);
+            write32(fop, (lzo_uint32) dst_len);
         else
-            write32(fop,src_len);
+            write32(fop, src_len);
 
         /* write checksum of uncompressed block */
         if (h->flags & F_ADLER32_D)
@@ -589,7 +589,4 @@ lzo_bool lzo_decompress(file_t *fip, file_t *fop,
 #endif /* WITH_LZO */
 
 
-/*
-vi:ts=4:et
-*/
-
+/* vim:set ts=4 sw=4 et: */

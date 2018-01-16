@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -28,6 +28,22 @@
 
 #ifndef __LZOP_CONF_H
 #define __LZOP_CONF_H 1
+
+#if defined(_WIN32)
+/* disable silly warnings about using "deprecated" POSIX functions like fopen() */
+#ifndef _CRT_NONSTDC_NO_DEPRECATE
+#define _CRT_NONSTDC_NO_DEPRECATE 1
+#endif
+#ifndef _CRT_NONSTDC_NO_WARNINGS
+#define _CRT_NONSTDC_NO_WARNINGS 1
+#endif
+#ifndef _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_DEPRECATE 1
+#endif
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS 1
+#endif
+#endif
 
 #if defined(LZOP_HAVE_CONFIG_H)
 #  include <config.h>
@@ -53,8 +69,8 @@
 #endif
 #if !defined(LZO_VERSION)
 #  error "you need the LZO library"
-#elif (LZO_VERSION < 0x1040)
-#  error "please upgrade your LZO package"
+#elif (LZO_VERSION < 0x2080) && 0
+#  error "please upgrade your LZO package to version 2.08 or newer"
 #endif
 #endif
 
@@ -610,22 +626,12 @@ typedef struct
     lzo_bytep   mb_mem_alloc;
     lzo_uint32  mb_size_alloc;
     lzo_uint32  mb_align;
-    /* the following fields are not yet used but may prove useful for
-     * adding new algorithms */
-    lzo_uint32  mb_flags;
-    lzo_uint32  mb_id;
-    lzo_uint32  mb_len;
-    lzo_uint32  mb_adler32;
-    lzo_uint32  mb_crc32;
 }
 mblock_t;
 #define mblock_p      mblock_t *
 
-lzo_bool mb_alloc(mblock_p m, lzo_uint32 size, lzo_uint align);
+lzo_bool mb_alloc(mblock_p m, lzo_uint32 size, lzo_uint32 align);
 void mb_free(mblock_p m);
-
-lzo_bool mb_init(mblock_p m, lzo_uint32 size, lzo_uint align,
-                 lzo_voidp heap, lzo_uint32 heap_size);
 
 
 /*************************************************************************
@@ -675,6 +681,7 @@ char *maybe_rename_file(const char *original_name);
 // other globals
 **************************************************************************/
 
+extern const char lzop_rcsid[];
 extern const char *progname;
 extern MODE_T u_mask;
 extern time_t current_time;
@@ -703,37 +710,6 @@ void sysinfo_djgpp(void);
 #  define USE_LZO1X_1_15 1
 #endif
 
-#if defined(LZO_USE_ASM_1)
-#if !defined(LZO_EXTERN_CDECL)
-#define LZO_EXTERN_CDECL(r) LZO_EXTERN(r)
-#endif
-LZO_EXTERN_CDECL(int)
-lzo1x_decompress_asm_fast
-                        ( const lzo_bytep src, lzo_uint  src_len,
-                                lzo_bytep dst, lzo_uintp dst_len,
-                                lzo_voidp wrkmem /* NOT USED */ );
-LZO_EXTERN_CDECL(int)
-lzo1x_decompress_asm_fast_safe
-                        ( const lzo_bytep src, lzo_uint  src_len,
-                                lzo_bytep dst, lzo_uintp dst_len,
-                                lzo_voidp wrkmem /* NOT USED */ );
-#  define lzo1x_decompress          lzo1x_decompress_asm_fast
-#  define lzo1x_decompress_safe     lzo1x_decompress_asm_fast_safe
-#elif defined(LZO_USE_ASM_2)
-LZO_EXTERN_CDECL(int)
-_lzo1x_decompress_asm_fast
-                        ( const lzo_bytep src, lzo_uint  src_len,
-                                lzo_bytep dst, lzo_uintp dst_len,
-                                lzo_voidp wrkmem /* NOT USED */ );
-LZO_EXTERN_CDECL(int)
-_lzo1x_decompress_asm_fast_safe
-                        ( const lzo_bytep src, lzo_uint  src_len,
-                                lzo_bytep dst, lzo_uintp dst_len,
-                                lzo_voidp wrkmem /* NOT USED */ );
-#  define lzo1x_decompress          _lzo1x_decompress_asm_fast
-#  define lzo1x_decompress_safe     _lzo1x_decompress_asm_fast_safe
-#endif
-
 #endif /* WITH_LZO */
 
 
@@ -747,7 +723,4 @@ _lzo1x_decompress_asm_fast_safe
 #endif /* already included */
 
 
-/*
-vi:ts=4:et
-*/
-
+/* vim:set ts=4 sw=4 et: */

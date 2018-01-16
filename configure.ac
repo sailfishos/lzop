@@ -3,7 +3,7 @@
 #
 #  This file is part of the lzop file compressor.
 #
-#  Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+#  Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
 #  All Rights Reserved.
 #
 #  lzop and the LZO library are free software; you can redistribute them
@@ -19,7 +19,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program; see the file COPYING.
 #  If not, write to the Free Software Foundation, Inc.,
-#  59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 #  Markus F.X.J. Oberhumer
 #  <markus@oberhumer.com>
@@ -31,16 +31,17 @@
 # // Init
 # ************************************************************************/
 
-AC_COPYRIGHT([Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer.
+AC_COPYRIGHT([Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer.
 All Rights Reserved.
 This configure script may be copied, distributed and modified under the
 terms of the GNU General Public License; see COPYING for more details.])
 
-AC_PREREQ(2.67)
-AC_INIT([lzop],[1.03],[lzop-bugs@oberhumer.com],[lzop],[http://www.oberhumer.com/opensource/lzop/])
+AC_PREREQ(2.69)
+AC_INIT([lzop],[1.04],[lzop-bugs@oberhumer.com],[lzop],[http://www.oberhumer.com/opensource/lzop/])
 AC_MSG_NOTICE([Configuring $PACKAGE_NAME $PACKAGE_VERSION])
 AC_CONFIG_SRCDIR(src/lzop.c)
 AC_CONFIG_AUX_DIR(autoconf)
+m4_include([autoconf/local.m4])
 AC_PREFIX_DEFAULT(/usr/local)
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
@@ -64,15 +65,21 @@ if test "X$enable_ansi" != Xno; then
 fi
 
 AC_PROG_CC
+AM_PROG_CC_C_O
+AM_PROG_AS
 AC_PROG_CPP
+gl_USE_SYSTEM_EXTENSIONS
 mfx_PROG_CPPFLAGS
 AC_C_CONST
 mfx_ACC_CHECK_ENDIAN
 AC_SYS_LARGEFILE
 
-AM_INIT_AUTOMAKE([1.11.1 foreign])
-AM_SILENT_RULES([no])
+AM_INIT_AUTOMAKE([1.14.1 foreign subdir-objects])
+AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS([config.h:config.hin])
+AH_TOP([#ifndef LZOP_AUTOCONF_CONFIG_H_INCLUDED__
+#define LZOP_AUTOCONF_CONFIG_H_INCLUDED__ 1])
+AH_BOTTOM([#endif /* already included */])
 
 
 # /***********************************************************************
@@ -137,17 +144,9 @@ fi
 
 if test "X$lzoconf_h_version" = X1; then
     AC_CHECK_LIB(lzo,__lzo_init2,,AC_MSG_ERROR([LZO library v1 not found. Please check your installation or set the environment variable \`LDFLAGS'.]))
-    if test "X$enable_asm" != Xno; then
-        AC_CHECK_LIB(lzo,lzo1x_decompress_asm_fast,AC_DEFINE(LZO_USE_ASM_1,1,[Use asm.]))
-        AC_CHECK_LIB(lzo,_lzo1x_decompress_asm_fast,AC_DEFINE(LZO_USE_ASM_2,1,[Use asm.]))
-    fi
 fi
 if test "X$lzoconf_h_version" = X2; then
     AC_CHECK_LIB(lzo2,__lzo_init_v2,,AC_MSG_ERROR([LZO library v2 not found. Please check your installation or set the environment variable \`LDFLAGS'.]))
-    if test "X$enable_asm" != Xno; then
-        AC_CHECK_LIB(lzo2,lzo1x_decompress_asm_fast,AC_DEFINE(LZO_USE_ASM_1,1,[Use asm.]))
-        AC_CHECK_LIB(lzo2,_lzo1x_decompress_asm_fast,AC_DEFINE(LZO_USE_ASM_2,1,[Use asm.]))
-    fi
 fi
 
 
@@ -168,7 +167,7 @@ AC_TYPE_OFF_T
 AC_CHECK_TYPE(ptrdiff_t,long)
 AC_TYPE_SIZE_T
 AC_TYPE_SIGNAL
-AC_STRUCT_ST_MTIM_NSEC
+gl_STAT_TIME
 
 mfx_ACC_CHECK_SIZEOF
 mfx_CHECK_SIZEOF
@@ -192,15 +191,14 @@ if test -r .Conf.settings2; then
     . ./.Conf.settings2
 fi
 
-test "X$CPPFLAGS" != "X" && CPPFLAGS="$CPPFLAGS "
-CPPFLAGS="${CPPFLAGS}-DLZOP_HAVE_CONFIG_H"
+my_DEFS="-DLZOP_HAVE_CONFIG_H=1"
 
-configure_CPPFLAGS=$CPPFLAGS
-configure_CFLAGS=$CFLAGS
-AC_SUBST(configure_CPPFLAGS)
-AC_SUBST(configure_CFLAGS)
-
-AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile])
+AC_CONFIG_COMMANDS_PRE([
+    test "X$DEFS" = "X-DHAVE_CONFIG_H" && DEFS=
+    test "X$DEFS" != "X" && DEFS="$DEFS "
+    DEFS="${DEFS}${my_DEFS}"
+])
+AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
 
@@ -212,6 +210,7 @@ cat <<EOF
    configured for host        : ${host_cpu}-${host_vendor}-${host_os}
    source code location       : ${srcdir}
    compiler                   : ${CC}
+   preprocessor definitions   : ${DEFS}
    preprocessor flags         : ${CPPFLAGS}
    compiler flags             : ${CFLAGS}
    linker flags               : ${LDFLAGS}
@@ -220,7 +219,7 @@ cat <<EOF
 
    ${PACKAGE_NAME} ${PACKAGE_VERSION} configured.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -243,4 +242,4 @@ After installing ${PACKAGE_NAME}, please read the accompanied documentation.
 
 EOF
 
-# vi:ts=4:et
+# vim:set ts=4 sw=4 et:

@@ -2,6 +2,11 @@
 User visible changes for lzop -- a very fast file compressor
 ==================================================================
 
+Changes in 1.04 (10 Aug 2017)
+  * Happy 20th anniversary release!
+  * Added CMake build support.
+  * Assorted minor updates.
+
 Changes in 1.03 (01 Nov 2010)
   * Assorted minor updates.
 
@@ -9,7 +14,7 @@ Changes in 1.02rc1 (25 Jul 2005)
   * Made lzop compile with LZO v2.
   * Under Windows files are now opened using the _O_SEQUENTIAL flag,
     which results in a major speedup when (de)compressing large files.
-  * Under MacOS X, the configure script now will use the '-no-cpp-precomp'
+  * Under Mac OS X, the configure script now will use the '-no-cpp-precomp'
     compiler option in order to work around bugs in Apple's native
     "smart" preprocessor.
   * File sizes > 2GB are correctly displayed.
@@ -19,10 +24,10 @@ Changes in 1.01 (27 Apr 2003)
     the Autoconf build system, enable Autoconf large file support.
   * Warn about a compressed file's trailing zero bytes only if in
     verbose mode (for compatibility with recent versions of GNU tar).
-  * Don't be to strict in favoring stdin - using '--no-stdin' should not
+  * Don't be too strict in favoring stdin - using '--no-stdin' should not
     be necessary any longer in cron jobs.
   * Added option '-P' to save/restore the path name of a compressed file.
-  * Added option '--crc32' to use a crc32 instead of a adler32 checksum.
+  * Added option '--crc32' to use a crc32 instead of an adler32 checksum.
   * Fixed an assertion that could trigger in very rare cases.
 
 Changes in 1.00 (27 Apr 1998)

@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -48,7 +48,7 @@ void head(void)
     fg = con_fg(f,FG_GREEN);
     con_fprintf(f,
                 "                          Lempel-Ziv-Oberhumer Packer\n"
-                "                           Copyright (C) 1996 - 2010\n"
+                "                           Copyright (C) 1996 - 2017\n"
                 "lzop v%-11s  Markus Franz Xaver Johannes Oberhumer  %20s\n"
                 "\n",
                 LZOP_VERSION_STRING, LZOP_VERSION_DATE);
@@ -165,7 +165,7 @@ con_fprintf(f,
 "   You should have received a copy of the GNU General Public License\n"
 "   along with this program; see the file COPYING.\n"
 "   If not, write to the Free Software Foundation, Inc.,\n"
-"   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
+"   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 "\n"
 "   Markus F.X.J. Oberhumer\n"
 "   <markus@oberhumer.com>\n"
@@ -269,7 +269,4 @@ void sysinfo(void)
 }
 
 
-/*
-vi:ts=4:et
-*/
-
+/* vim:set ts=4 sw=4 et: */

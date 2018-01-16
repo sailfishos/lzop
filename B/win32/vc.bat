@@ -1,4 +1,4 @@
-@echo // Copyright (C) 1996-2010 Markus F.X.J. Oberhumer
+@echo // Copyright (C) 1996-2017 Markus F.X.J. Oberhumer
 @echo //
 @echo //   Windows 32-bit
 @echo //   Microsoft Visual C/C++
@@ -7,7 +7,7 @@
 @if "%BECHO%"=="n" echo off
 
 
-cl -nologo -MD -O2 -GF -W3 %CFI% -Fe%BEXE% @b\src.rsp %BLDLIBS% /link /map:%BNAME%.map
+cl -nologo -MT -O2 -GF -W3 %CFI% -Fe%BEXE% @b\src.rsp %BLDLIBS% /link /map:%BNAME%.map
 @if errorlevel 1 goto error
 
 

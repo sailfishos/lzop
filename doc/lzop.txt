@@ -217,12 +217,12 @@ OPTIONS
         Do not delete input files. This is the default.
 
     -U, --unlink, --delete
-        Delete input files after succesfull compression or decompression.
+        Delete input files after successful compression or decompression.
         Use this option to make lzop behave like gzip and bzip2. Note that
         explicitly giving -k overrides -U.
 
     --crc32
-        Use a crc32 checksum instead of a adler32 checksum.
+        Use a crc32 checksum instead of an adler32 checksum.
 
     --no-warn
         Suppress all warnings.
@@ -384,7 +384,7 @@ ENVIRONMENT
     tell you.
 
 SEE ALSO
-    bzip2(1), gzip(1), tar(1)
+    bzip2(1), gzip(1), tar(1), xz(1)
 
     Precompiled binaries for some platforms are available from the lzop home
     page.
@@ -410,9 +410,8 @@ AUTHOR
     http://www.oberhumer.com/opensource/lzop/
 
 COPYRIGHT
-    lzop and the LZO library are Copyright (C) 1996, 1997, 1998, 1999, 2000,
-    2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 by Markus
-    Franz Xaver Johannes Oberhumer. All Rights Reserved.
+    lzop and the LZO library are Copyright (C) 1996-2017 Markus Franz Xaver
+    Oberhumer <markus@oberhumer.com>. All Rights Reserved.
 
     lzop and the LZO library are distributed under the terms of the GNU
     General Public License (GPL).
