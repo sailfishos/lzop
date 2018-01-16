@@ -13,7 +13,7 @@ Introduction
 
       export CPPFLAGS=-I/home/user/src/lzo-2.01/include
       export LDFLAGS=-L/home/user/src/lzo-2.01/src/.libs
-      [ Note that you must use _absolute_ paths in these envrionment vars. ]
+      [ Note that you must use _absolute_ paths in these environment vars. ]
 
   Then run the usual commands:
       ./configure

@@ -1,5 +1,5 @@
 Name:           lzop
-Version:        1.03
+Version:        1.04
 Release:        0
 Summary:        The fastest compressor and decompressor around
 License:        GPLv2+
@@ -24,6 +24,14 @@ lzop was designed with the following goals in mind:
 - reasonable drop-in compatibility to gzip
 - portability
 
+%package doc
+Summary:        LZOP documentation
+Group:          Development/Tools
+Requires:       lzop = %{version}-%{release}
+
+%description doc
+lzop documentation. Man pages and html docs.
+
 %prep
 %setup -q
 
@@ -41,6 +49,10 @@ export LDFLAGS="-L%{_libdir}"
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS ChangeLog COPYING NEWS README THANKS
 %{_bindir}/lzop
+
+%files doc
+%defattr(-,root,root)
+%{_docdir}/lzop
 %doc %{_mandir}/man1/lzop.1*
+

@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -209,11 +209,17 @@ void e_envopt(const char *n)
 #endif
 
 
-RETSIGTYPE __acc_cdecl_sighandler e_sighandler(acc_signo_t signo)
+#if defined(__cplusplus)
+extern "C" {
+#endif
+static void __acc_cdecl_sighandler e_sighandler(acc_signo_t signo)
 {
     UNUSED(signo);
     e_exit(EXIT_FATAL);
 }
+#if defined(__cplusplus)
+}
+#endif
 
 
 /*************************************************************************
@@ -742,12 +748,10 @@ void init_compress_header(header_t *h, const file_t *fip, const file_t *fop)
 
     h->mode = fix_mode_for_header(fip->st.st_mode);
 
-    if (fip->st.st_mtime)
+    if (fip->st.st_mtime > 0)
     {
-        h->mtime_low = (lzo_uint32) (fip->st.st_mtime);
-        h->mtime_high = (lzo_uint32) (fip->st.st_mtime >> 16 >> 16);
-        if ((lzo_int32) h->mtime_high < 0)
-            h->mtime_high = 0;
+        h->mtime_low  = (lzo_uint32) (fip->st.st_mtime);
+        h->mtime_high = (lzo_uint32) ((fip->st.st_mtime >> 16) >> 16);
     }
 
     if (fip->name[0] && fip->fd != STDIN_FILENO)
@@ -1539,7 +1543,9 @@ static lzo_bool check_stdout(file_t *ft)
 
 static lzo_bool open_stdin(file_t *ft)
 {
+#if !defined(NO_SETMODE)
     static lzo_bool setmode_done = 0;
+#endif
 
     assert(ft->fd == -1);
     f_reset(ft);
@@ -1556,8 +1562,8 @@ static lzo_bool open_stdin(file_t *ft)
             return 0;
         }
     }
-#endif
     setmode_done = 1;
+#endif
 
     ft->st.st_mtime = time(NULL);
 #if 1 && defined(HAVE_FSTAT)
@@ -1575,7 +1581,9 @@ static lzo_bool open_stdin(file_t *ft)
 
 static lzo_bool open_stdout(file_t *ft)
 {
+#if !defined(NO_SETMODE)
     static lzo_bool setmode_done = 0;
+#endif
 
     assert(ft->fd == -1);
     f_reset(ft);
@@ -1597,8 +1605,8 @@ static lzo_bool open_stdout(file_t *ft)
             return 0;
         }
     }
-#endif
     setmode_done = 1;
+#endif
 
     return 1;
 }
@@ -2583,7 +2591,7 @@ static int do_option(acc_getopt_p g, int optc)
         opt_console = CON_NONE;
         fprintf(stdout,"lzop %s\n",LZOP_VERSION_STRING);
         fprintf(stdout,"LZO library %s\n",lzo_version_string());
-        fprintf(stdout,"Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer\n");
+        fprintf(stdout,"Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer\n");
         e_exit(EXIT_OK);
         break;
     case 'x':
@@ -2984,15 +2992,12 @@ int __acc_cdecl_main main(int argc, char *argv[])
     static char default_argv0[] = "lzop";
     int cmdline_cmd = CMD_NONE;
 
-    sanity_check();
-
-#if defined(__MINT__)
-    __binmode(1);
-    __set_binmode(stdout, 0);
-    __set_binmode(stderr, 0);
+#if (ACC_OS_WIN32 || ACC_OS_WIN64) && (ACC_CC_MSC) && defined(_WRITE_ABORT_MSG) && defined(_CALL_REPORTFAULT)
+    _set_abort_behavior(_WRITE_ABORT_MSG, _WRITE_ABORT_MSG | _CALL_REPORTFAULT);
 #endif
     acc_wildargv(&argc, &argv);
 
+    sanity_check();
 
 #if defined(__DJGPP__)
     opt_shortname = !_USE_LFN;
@@ -3147,6 +3152,7 @@ int __acc_cdecl_main main(int argc, char *argv[])
         opt_console = CON_SCREEN;
         (void) ((con_intro(con_term) || (help(), 0)));
         e_exit(EXIT_OK);
+        break;
     case CMD_VERSION:
         version();
         e_exit(EXIT_OK);
@@ -3195,7 +3201,4 @@ int __acc_cdecl_main main(int argc, char *argv[])
 }
 
 
-/*
-vi:ts=4:et
-*/
-
+/* vim:set ts=4 sw=4 et: */

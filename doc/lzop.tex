@@ -62,7 +62,7 @@ stamp was not preserved after a file transfer.
 \textbf{lzop} preserves the ownership, mode and time stamp of files
 when compressing. When decompressing lzop restores the
 mode and time stamp if present in the compressed files.
-See the options \textbf{-n}, \textbf{-N}, \textbf{--no-mode} and \textbf{--no-time}
+See the options \textbf{-n}, \textbf{-N}, \textbf{-{}-no-mode} and \textbf{-{}-no-time}
 for more information.
 
 
@@ -96,13 +96,13 @@ the default level offers pretty fast compression.
 may change in a future release.
 
 
-\item[{-1, --fast}] \mbox{}
+\item[{-1, -{}-fast}] \mbox{}
 
 can be even a little bit faster in some cases - but
 most times you won't notice the difference
 
 
-\item[{-7, -8, -9, --best}] \mbox{}
+\item[{-7, -8, -9, -{}-best}] \mbox{}
 
 these compression levels are mainly intended for generating
 pre-compressed data - especially \textbf{-9} can be somewhat slow
@@ -122,34 +122,34 @@ If no other command is given then lzop defaults to compression
 
 \begin{description}
 
-\item[{-\#, --fast, --best}] \mbox{}
+\item[{-\#, -{}-fast, -{}-best}] \mbox{}
 
 Regulate the speed of compression using the specified
-digit \textbf{\#}, where -1 or --fast indicates the
+digit \textbf{\#}, where -1 or -{}-fast indicates the
 fastest compression method (less compression) and
--9 or --best indicates the slowest compression
+-9 or -{}-best indicates the slowest compression
 method (best compression). The default compression
 level is -3.
 
 
-\item[{-d, --decompress, --uncompress}] \mbox{}
+\item[{-d, -{}-decompress, -{}-uncompress}] \mbox{}
 
 Decompress. Each file will be placed into
 same the directory as the compressed file.
 
 
-\item[{-x, --extract}] \mbox{}
+\item[{-x, -{}-extract}] \mbox{}
 
 Extract compressed files to the current working
 directory. This is the same as '-dPp'.
 
 
-\item[{-t, --test}] \mbox{}
+\item[{-t, -{}-test}] \mbox{}
 
 Test. Check the compressed file integrity.
 
 
-\item[{-l, --list}] \mbox{}
+\item[{-l, -{}-list}] \mbox{}
 
 For each compressed file, list the following
 fields:
@@ -163,7 +163,7 @@ fields:
 \end{verbatim}
 
 
-In combination with the --verbose option, the following
+In combination with the -{}-verbose option, the following
 fields are also displayed:
 
 \begin{verbatim}
@@ -171,14 +171,14 @@ fields are also displayed:
 \end{verbatim}
 
 
-With --name, the uncompressed name, date and time
+With -{}-name, the uncompressed name, date and time
 are those stored within the compress file if present.
 
 
 
-With --verbose, the size totals and compression
+With -{}-verbose, the size totals and compression
 ratio for all files is also displayed. With
---quiet, the title and totals lines are not displayed.
+-{}-quiet, the title and totals lines are not displayed.
 
 
 
@@ -186,7 +186,7 @@ Note that lzop defines compression ratio
 as compressed\_size / uncompressed\_size.
 
 
-\item[{--ls, --ls=\textit{FLAGS}}] \mbox{}
+\item[{-{}-ls, -{}-ls=\textit{FLAGS}}] \mbox{}
 
 List each compressed file in a format similar to \textbf{ls~-ln}.
 
@@ -198,22 +198,22 @@ The following flags are currently honoured:
   Q  Enclose file names in double quotes.
 
 
-\item[{--info}] \mbox{}
+\item[{-{}-info}] \mbox{}
 
 For each compressed file, list the internal header fields.
 
 
-\item[{-I, --sysinfo}] \mbox{}
+\item[{-I, -{}-sysinfo}] \mbox{}
 
 Display information about the system and quit.
 
 
-\item[{-L, --license}] \mbox{}
+\item[{-L, -{}-license}] \mbox{}
 
 Display the lzop license and quit.
 
 
-\item[{-h, -H, --help}] \mbox{}
+\item[{-h, -H, -{}-help}] \mbox{}
 
 Display a help screen and quit.
 
@@ -224,7 +224,7 @@ Version. Display the version number and compilation
 options and quit.
 
 
-\item[{--version}] \mbox{}
+\item[{-{}-version}] \mbox{}
 
 Version. Display the version number and quit.
 
@@ -232,7 +232,7 @@ Version. Display the version number and quit.
 \section{OPTIONS\label{OPTIONS}\index{OPTIONS}}
 \begin{description}
 
-\item[{-c, --stdout, --to-stdout}] \mbox{}
+\item[{-c, -{}-stdout, -{}-to-stdout}] \mbox{}
 
 Write output on standard output. If there are several
 input files, the output consists of a sequence
@@ -241,14 +241,14 @@ better compression, concatenate all input files
 before compressing them.
 
 
-\item[{-o \textit{FILE}, --output=\textit{FILE}}] \mbox{}
+\item[{-o \textit{FILE}, -{}-output=\textit{FILE}}] \mbox{}
 
 Write output to the file \textit{FILE}. If there are several
 input files, the output consists of a sequence
 of independently (de)compressed members.
 
 
-\item[{-p, -p\textit{DIR}, --path=\textit{DIR}}] \mbox{}
+\item[{-p, -p\textit{DIR}, -{}-path=\textit{DIR}}] \mbox{}
 
 Write output files into the directory \textit{DIR} instead
 of the directory determined by the input file. If
@@ -256,7 +256,7 @@ of the directory determined by the input file. If
 directory.
 
 
-\item[{-f, --force}] \mbox{}
+\item[{-f, -{}-force}] \mbox{}
 
 Force lzop to
 
@@ -280,7 +280,7 @@ Using \textbf{-f} two or more times forces things like
 Use with care.
 
 
-\item[{-F, --no-checksum}] \mbox{}
+\item[{-F, -{}-no-checksum}] \mbox{}
 
 Do not store or verify a checksum of the uncompressed
 file when compressing or decompressing.
@@ -293,7 +293,7 @@ compressing with one of the slow compression levels (-7, -8 or -9),
 regardless of this option.
 
 
-\item[{-n, --no-name}] \mbox{}
+\item[{-n, -{}-no-name}] \mbox{}
 
 When decompressing, do not restore the original
 file name if present (remove only the lzop suffix
@@ -301,7 +301,7 @@ from the compressed file name). This option is the
 default under UNIX.
 
 
-\item[{-N, --name}] \mbox{}
+\item[{-N, -{}-name}] \mbox{}
 
 When decompressing, restore the original file name
 if present. This option is useful on systems which
@@ -320,19 +320,19 @@ This option is mainly useful when using \textbf{archive mode} - see
 usage examples below.
 
 
-\item[{--no-mode}] \mbox{}
+\item[{-{}-no-mode}] \mbox{}
 
 When decompressing, do not restore the original
 mode (permissions) saved in the compressed file.
 
 
-\item[{--no-time}] \mbox{}
+\item[{-{}-no-time}] \mbox{}
 
 When decompressing, do not restore the original
 time stamp saved in the compressed file.
 
 
-\item[{-S \textit{.suf}, --suffix=\textit{.suf}}] \mbox{}
+\item[{-S \textit{.suf}, -{}-suffix=\textit{.suf}}] \mbox{}
 
 Use suffix \textit{.suf} instead of \textit{.lzo}. The suffix must
 not contain multiple dots and special characters like '+' or '*',
@@ -340,58 +340,58 @@ and suffixes other than \textit{.lzo} should be avoided to avoid confusion
 when files are transferred to other systems.
 
 
-\item[{-k, --keep}] \mbox{}
+\item[{-k, -{}-keep}] \mbox{}
 
 Do not delete input files. This is the default.
 
 
-\item[{-U, --unlink, --delete}] \mbox{}
+\item[{-U, -{}-unlink, -{}-delete}] \mbox{}
 
-Delete input files after succesfull compression or
+Delete input files after successful compression or
 decompression. Use this option to make lzop behave
 like \textbf{gzip} and \textbf{bzip2}.
 Note that explicitly giving \textbf{-k} overrides \textbf{-U}.
 
 
-\item[{--crc32}] \mbox{}
+\item[{-{}-crc32}] \mbox{}
 
-Use a crc32 checksum instead of a adler32 checksum.
+Use a crc32 checksum instead of an adler32 checksum.
 
 
-\item[{--no-warn}] \mbox{}
+\item[{-{}-no-warn}] \mbox{}
 
 Suppress all warnings.
 
 
-\item[{--ignore-warn}] \mbox{}
+\item[{-{}-ignore-warn}] \mbox{}
 
 Suppress all warnings, and never exit with exit status 2.
 
 
-\item[{-q, --quiet, --silent}] \mbox{}
+\item[{-q, -{}-quiet, -{}-silent}] \mbox{}
 
 Suppress all warnings and decrease the verbosity of some
-commands like \textbf{--list} or \textbf{--test}.
+commands like \textbf{-{}-list} or \textbf{-{}-test}.
 
 
-\item[{-v, --verbose}] \mbox{}
+\item[{-v, -{}-verbose}] \mbox{}
 
 Verbose. Display the name for each file compressed
 or decompressed. Multiple \textbf{-v} can be used to increase
-the verbosity of some commands like \textbf{--list} or \textbf{--test}.
+the verbosity of some commands like \textbf{-{}-list} or \textbf{-{}-test}.
 
 
-\item[{--}] \mbox{}
+\item[{-{}-}] \mbox{}
 
 Specifies that this is the end of the options. Any file name
-after \textbf{--} will not be interpreted as an option even if
+after \textbf{-{}-} will not be interpreted as an option even if
 it starts with a hyphen.
 
 \end{description}
 \section{OTHER OPTIONS\label{OTHER_OPTIONS}\index{OTHER OPTIONS}}
 \begin{description}
 
-\item[{--no-stdin}] \mbox{}
+\item[{-{}-no-stdin}] \mbox{}
 
 Do not try to read standard input (but a file name "-" will
 still override this option).
@@ -399,7 +399,7 @@ In old versions of \textbf{lzop}, this option was necessary when
 used in cron jobs (which do not have a controlling terminal).
 
 
-\item[{--filter=\textit{NUMBER}}] \mbox{}
+\item[{-{}-filter=\textit{NUMBER}}] \mbox{}
 
 Rarely useful.
 Preprocess data with a special "multimedia" filter
@@ -412,33 +412,33 @@ More effective filters may be added in the future, though.
 
 
 
-You can try --filter=1 with data like 8-bit sound samples,
---filter=2 with 16-bit samples or depth-16 images, etc.
+You can try -{}-filter=1 with data like 8-bit sound samples,
+-{}-filter=2 with 16-bit samples or depth-16 images, etc.
 
 
 
 Un-filtering during decompression is handled automatically.
 
 
-\item[{-C, --checksum}] \mbox{}
+\item[{-C, -{}-checksum}] \mbox{}
 
 Deprecated. Only for compatibility with very old versions
 as lzop now uses a checksum by default. This option will
 get removed in a future release.
 
 
-\item[{--no-color}] \mbox{}
+\item[{-{}-no-color}] \mbox{}
 
 Do not use any color escape sequences.
 
 
-\item[{--mono}] \mbox{}
+\item[{-{}-mono}] \mbox{}
 
 Assume a mono ANSI terminal. This is the default under UNIX
 (if console support is compiled in).
 
 
-\item[{--color}] \mbox{}
+\item[{-{}-color}] \mbox{}
 
 Assume a color ANSI terminal or try full-screen access. This
 is the default under DOS and in a Linux virtual console
@@ -553,7 +553,7 @@ If you wish to create a single archive file with multiple
 members so that members can later be extracted independently,
 you should prefer a full-featured archiver such as
 tar. The latest version of GNU tar supports the
-\textbf{--use-compress-program=lzop} option to invoke lzop transparently.
+\textbf{-{}-use-compress-program=lzop} option to invoke lzop transparently.
 lzop is designed as a complement to tar, not as
 a replacement.
 
@@ -584,7 +584,7 @@ lzop will tell you.
 \section{SEE ALSO\label{SEE_ALSO}\index{SEE ALSO}}
 
 
-\textbf{bzip2}(1), \textbf{gzip}(1), \textbf{tar}(1)
+\textbf{bzip2}(1), \textbf{gzip}(1), \textbf{tar}(1), \textbf{xz}(1)
 
 
 
@@ -607,7 +607,7 @@ services.
 
 Exit status is normally 0; if an error occurs, exit status
 is 1. If a warning occurs, exit status is 2 (unless
-option \textbf{--ignore-warn} is in effect).
+option \textbf{-{}-ignore-warn} is in effect).
 
 
 
@@ -629,8 +629,7 @@ http://www.oberhumer.com/opensource/lzop/
 
 
 lzop and the LZO library are
-Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-2006, 2007, 2008, 2009, 2010 by Markus Franz Xaver Johannes Oberhumer.
+Copyright (C) 1996-2017 Markus Franz Xaver Oberhumer $<$markus@oberhumer.com$>$.
 All Rights Reserved.
 
 

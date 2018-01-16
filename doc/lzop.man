@@ -2,61 +2,61 @@ LZOP(1)                                                                LZOP(1)
 
 
 
-NNAAMMEE
+[1mNAME[0m
        lzop - compress or expand files
 
-AABBSSTTRRAACCTT
-       llzzoopp is a file compressor very similar to ggzziipp.  llzzoopp favors speed over
+[1mABSTRACT[0m
+       [1mlzop [22mis a file compressor very similar to [1mgzip[22m.  [1mlzop [22mfavors speed over
        compression ratio.
 
-SSYYNNOOPPSSIISS
-       llzzoopp [ _c_o_m_m_a_n_d ] [ _o_p_t_i_o_n_s ] [ _f_i_l_e_n_a_m_e ...  ]
+[1mSYNOPSIS[0m
+       [1mlzop [22m[ [4mcommand[24m ] [ [4moptions[24m ] [ [4mfilename[24m ...  ]
 
-       llzzoopp [--ddxxlltthhIIVVLL1199] [--qqvvccffFFnnNNPPkkUU] [--oo _f_i_l_e] [--pp[_p_a_t_h]] [--SS _s_u_f_f_i_x]
-       [_f_i_l_e_n_a_m_e ...]
+       [1mlzop [22m[[1m-dxlthIVL19[22m] [[1m-qvcfFnNPkU[22m] [[1m-o [4m[22mfile[24m] [[1m-p[22m[[4mpath[24m]] [[1m-S [4m[22msuffix[24m]
+       [[4mfilename[24m ...]
 
-DDEESSCCRRIIPPTTIIOONN
-       llzzoopp reduces the size of the named files. Whenever possible, each file
-       is compressed into one with the extension ..llzzoo, while keeping the same
+[1mDESCRIPTION[0m
+       [1mlzop [22mreduces the size of the named files. Whenever possible, each file
+       is compressed into one with the extension [1m.lzo[22m, while keeping the same
        ownership modes, access and modification times. If no files are
        specified, or if a file name is "-", lzop tries to compress the
        standard input to the standard output. lzop will only attempt to
        compress regular files or symbolic links to regular files.  In
        particular, it will ignore directories.
 
-       If the compressed file name is too long for its file system, llzzoopp
+       If the compressed file name is too long for its file system, [1mlzop[0m
        truncates it.
 
-       Compressed files can be restored to their original form using llzzoopp --dd.
-       llzzoopp --dd takes a list of files on its command line and decompresses each
-       file whose name ends with ..llzzoo and which begins with the correct magic
-       number to an uncompressed file without the original extension. llzzoopp --dd
-       also recognizes the special extension ..ttzzoo as shorthand for ..ttaarr..llzzoo.
-       When compressing, lzop uses the ..ttzzoo extension if necessary instead of
-       truncating a file with a ..ttaarr extension.
+       Compressed files can be restored to their original form using [1mlzop -d[22m.
+       [1mlzop -d [22mtakes a list of files on its command line and decompresses each
+       file whose name ends with [1m.lzo [22mand which begins with the correct magic
+       number to an uncompressed file without the original extension. [1mlzop -d[0m
+       also recognizes the special extension [1m.tzo [22mas shorthand for [1m.tar.lzo[22m.
+       When compressing, lzop uses the [1m.tzo [22mextension if necessary instead of
+       truncating a file with a [1m.tar [22mextension.
 
-       llzzoopp stores the original file name, mode and time stamp in the
+       [1mlzop [22mstores the original file name, mode and time stamp in the
        compressed file. These can be used when decompressing the file with the
-       --dd option. This is useful when the compressed file name was truncated
+       [1m-d [22moption. This is useful when the compressed file name was truncated
        or when the time stamp was not preserved after a file transfer.
 
-       llzzoopp preserves the ownership, mode and time stamp of files when
+       [1mlzop [22mpreserves the ownership, mode and time stamp of files when
        compressing. When decompressing lzop restores the mode and time stamp
-       if present in the compressed files.  See the options --nn, --NN, ----nnoo--mmooddee
-       and ----nnoo--ttiimmee for more information.
+       if present in the compressed files.  See the options [1m-n[22m, [1m-N[22m, [1m--no-mode[0m
+       and [1m--no-time [22mfor more information.
 
-       llzzoopp always keeps original files unchanged unless you use the option
-       --UU.
+       [1mlzop [22malways keeps original files unchanged unless you use the option
+       [1m-U[22m.
 
-       llzzoopp uses the _L_Z_O _d_a_t_a _c_o_m_p_r_e_s_s_i_o_n _l_i_b_r_a_r_y for compression services.
+       [1mlzop [22muses the [4mLZO[24m [4mdata[24m [4mcompression[24m [4mlibrary[24m for compression services.
        The amount of compression obtained depends on the size of the input and
        the distribution of common substrings.  Typically, text such as source
        code or English is compressed into 40-50% of the original size, and
        large files usually compress much better than small ones. Compression
        and decompression speed is generally much faster than that achieved by
-       ggzziipp, but compression ratio is worse.
+       [1mgzip[22m, but compression ratio is worse.
 
-   CCOOMMPPRREESSSSIIOONN LLEEVVEELLSS
+   [1mCOMPRESSION LEVELS[0m
        lzop offers the following compression levels of the LZO1X algorithm:
 
        -3  the default level offers pretty fast compression.  -2, -3, -4, -5
@@ -65,21 +65,21 @@ DDEESSCCRRIIPPTTIIOONN
 
        -1, --fast
            can be even a little bit faster in some cases - but most times you
-           won’t notice the difference
+           won't notice the difference
 
        -7, -8, -9, --best
            these compression levels are mainly intended for generating pre-
-           compressed data - especially --99 can be somewhat slow
+           compressed data - especially [1m-9 [22mcan be somewhat slow
 
-       Decompression is _v_e_r_y fast for all compression levels, and
+       Decompression is [4mvery[24m fast for all compression levels, and
        decompression speed is not affected by the compression level.
 
-MMAAIINN CCOOMMMMAANNDD
+[1mMAIN COMMAND[0m
        If no other command is given then lzop defaults to compression (using
        compression level -3).
 
        -#, --fast, --best
-           Regulate the speed of compression using the specified digit ##,
+           Regulate the speed of compression using the specified digit [1m#[22m,
            where -1 or --fast indicates the fastest compression method (less
            compression) and -9 or --best indicates the slowest compression
            method (best compression). The default compression level is -3.
@@ -90,7 +90,7 @@ MMAAIINN CCOOMMMMAANNDD
 
        -x, --extract
            Extract compressed files to the current working directory. This is
-           the same as ’-dPp’.
+           the same as '-dPp'.
 
        -t, --test
            Test. Check the compressed file integrity.
@@ -119,11 +119,11 @@ MMAAIINN CCOOMMMMAANNDD
            Note that lzop defines compression ratio as compressed_size /
            uncompressed_size.
 
-       --ls, --ls=_F_L_A_G_S
-           List each compressed file in a format similar to llss --llnn.
+       --ls, --ls=[4mFLAGS[0m
+           List each compressed file in a format similar to [1mls -ln[22m.
 
            The following flags are currently honoured:
-             F  Append a ’*’ for executable files.
+             F  Append a '*' for executable files.
              G  Inhibit display of group information.
              Q  Enclose file names in double quotes.
 
@@ -145,21 +145,21 @@ MMAAIINN CCOOMMMMAANNDD
        --version
            Version. Display the version number and quit.
 
-OOPPTTIIOONNSS
+[1mOPTIONS[0m
        -c, --stdout, --to-stdout
            Write output on standard output. If there are several input files,
            the output consists of a sequence of independently (de)compressed
            members. To obtain better compression, concatenate all input files
            before compressing them.
 
-       -o _F_I_L_E, --output=_F_I_L_E
-           Write output to the file _F_I_L_E. If there are several input files,
+       -o [4mFILE[24m, --output=[4mFILE[0m
+           Write output to the file [4mFILE[24m. If there are several input files,
            the output consists of a sequence of independently (de)compressed
            members.
 
-       -p, -p_D_I_R, --path=_D_I_R
-           Write output files into the directory _D_I_R instead of the directory
-           determined by the input file. If _D_I_R is omitted, then write to the
+       -p, -p[4mDIR[24m, --path=[4mDIR[0m
+           Write output files into the directory [4mDIR[24m instead of the directory
+           determined by the input file. If [4mDIR[24m is omitted, then write to the
            current working directory.
 
        -f, --force
@@ -170,7 +170,7 @@ OOPPTTIIOONNSS
             - (de-)compress to stdout even if it seems a terminal
             - allow option -c in combination with -U
 
-           Using --ff two or more times forces things like
+           Using [1m-f [22mtwo or more times forces things like
 
             - compress files that already have a .lzo suffix
             - try to decompress files that do not have a valid suffix
@@ -202,7 +202,7 @@ OOPPTTIIOONNSS
 
        -P  When decompressing, restore the original path and file name if
            present.  When compressing, store the relative (and cleaned) path
-           name.  This option is mainly useful when using aarrcchhiivvee mmooddee - see
+           name.  This option is mainly useful when using [1marchive mode [22m- see
            usage examples below.
 
        --no-mode
@@ -213,22 +213,22 @@ OOPPTTIIOONNSS
            When decompressing, do not restore the original time stamp saved in
            the compressed file.
 
-       -S _._s_u_f, --suffix=_._s_u_f
-           Use suffix _._s_u_f instead of _._l_z_o. The suffix must not contain
-           multiple dots and special characters like ’+’ or ’*’, and suffixes
-           other than _._l_z_o should be avoided to avoid confusion when files are
+       -S [4m.suf[24m, --suffix=[4m.suf[0m
+           Use suffix [4m.suf[24m instead of [4m.lzo[24m. The suffix must not contain
+           multiple dots and special characters like '+' or '*', and suffixes
+           other than [4m.lzo[24m should be avoided to avoid confusion when files are
            transferred to other systems.
 
        -k, --keep
            Do not delete input files. This is the default.
 
        -U, --unlink, --delete
-           Delete input files after succesfull compression or decompression.
-           Use this option to make lzop behave like ggzziipp and bbzziipp22.  Note that
-           explicitly giving --kk overrides --UU.
+           Delete input files after successful compression or decompression.
+           Use this option to make lzop behave like [1mgzip [22mand [1mbzip2[22m.  Note that
+           explicitly giving [1m-k [22moverrides [1m-U[22m.
 
        --crc32
-           Use a crc32 checksum instead of a adler32 checksum.
+           Use a crc32 checksum instead of an adler32 checksum.
 
        --no-warn
            Suppress all warnings.
@@ -238,30 +238,30 @@ OOPPTTIIOONNSS
 
        -q, --quiet, --silent
            Suppress all warnings and decrease the verbosity of some commands
-           like ----lliisstt or ----tteesstt.
+           like [1m--list [22mor [1m--test[22m.
 
        -v, --verbose
            Verbose. Display the name for each file compressed or decompressed.
-           Multiple --vv can be used to increase the verbosity of some commands
-           like ----lliisstt or ----tteesstt.
+           Multiple [1m-v [22mcan be used to increase the verbosity of some commands
+           like [1m--list [22mor [1m--test[22m.
 
        --  Specifies that this is the end of the options. Any file name after
-           ---- will not be interpreted as an option even if it starts with a
+           [1m-- [22mwill not be interpreted as an option even if it starts with a
            hyphen.
 
-OOTTHHEERR OOPPTTIIOONNSS
+[1mOTHER OPTIONS[0m
        --no-stdin
            Do not try to read standard input (but a file name "-" will still
-           override this option).  In old versions of llzzoopp, this option was
+           override this option).  In old versions of [1mlzop[22m, this option was
            necessary when used in cron jobs (which do not have a controlling
            terminal).
 
-       --filter=_N_U_M_B_E_R
+       --filter=[4mNUMBER[0m
            Rarely useful.  Preprocess data with a special "multimedia" filter
-           before compressing in order to improve compression ratio.  _N_U_M_B_E_R
+           before compressing in order to improve compression ratio.  [4mNUMBER[0m
            must be a decimal number from 1 to 16, inclusive.  Using a filter
            slows down both compression and decompression quite a bit, and the
-           compression ratio usually doesn’t improve much either...  More
+           compression ratio usually doesn't improve much either...  More
            effective filters may be added in the future, though.
 
            You can try --filter=1 with data like 8-bit sound samples,
@@ -286,18 +286,18 @@ OOTTHHEERR OOPPTTIIOONNSS
            default under DOS and in a Linux virtual console (if console
            support is compiled in).
 
-AADDVVAANNCCEEDD UUSSAAGGEE
+[1mADVANCED USAGE[0m
        lzop allows you to deal with your files in many flexible ways. Here are
        some usage examples:
 
-       bbaacckkuupp mmooddee
+       [1mbackup mode[0m
           tar --use-compress-program=lzop -cf archive.tar.lzo files..
 
           This is the recommended mode for creating backups.
           Requires GNU tar or a compatible version which accepts the
           '--use-compress-program=XXX' option.
 
-       ssiinnggllee ffiillee mmooddee:: individually (de)compress each file
+       [1msingle file mode: [22mindividually (de)compress each file
          create
            lzop a.c             -> create a.c.lzo
            lzop a.c b.c         -> create a.c.lzo & b.c.lzo
@@ -318,7 +318,7 @@ AADDVVAANNCCEEDD UUSSAAGGEE
            lzop -t a.c.lzo
            lzop -tq *.lzo       -> be quiet
 
-       ppiippee mmooddee:: (de)compress from stdin to stdout
+       [1mpipe mode: [22m(de)compress from stdin to stdout
          create
            lzop < a.c > y.lzo
            cat a.c | lzop > y.lzo
@@ -337,7 +337,7 @@ AADDVVAANNCCEEDD UUSSAAGGEE
            lzop -t < y.lzo
            cat y.lzo | lzop -t
 
-       ssttddoouutt mmooddee:: (de)compress to stdout
+       [1mstdout mode: [22m(de)compress to stdout
          create
            lzop -c a.c > y.lzo
 
@@ -348,7 +348,7 @@ AADDVVAANNCCEEDD UUSSAAGGEE
          list
            lzop -dc y.tar.lzo | tar -tvf -      -> list a tar file
 
-       aarrcchhiivvee mmooddee:: compress/extract multiple files into a single archive
+       [1marchive mode: [22mcompress/extract multiple files into a single archive
        file
          create
            lzop a.c b.c -o sources.lzo          -> create an archive
@@ -371,12 +371,12 @@ AADDVVAANNCCEEDD UUSSAAGGEE
        If you wish to create a single archive file with multiple members so
        that members can later be extracted independently, you should prefer a
        full-featured archiver such as tar. The latest version of GNU tar
-       supports the ----uussee--ccoommpprreessss--pprrooggrraamm==llzzoopp option to invoke lzop
+       supports the [1m--use-compress-program=lzop [22moption to invoke lzop
        transparently.  lzop is designed as a complement to tar, not as a
        replacement.
 
-EENNVVIIRROONNMMEENNTT
-       The environment variable LLZZOOPP can hold a set of default options for
+[1mENVIRONMENT[0m
+       The environment variable [1mLZOP [22mcan hold a set of default options for
        lzop. These options are interpreted first and can be overwritten by
        explicit command line parameters.  For example:
 
@@ -390,8 +390,8 @@ EENNVVIIRROONNMMEENNTT
        Not all of the options are valid in the environment variable - lzop
        will tell you.
 
-SSEEEE AALLSSOO
-       bbzziipp22(1), ggzziipp(1), ttaarr(1)
+[1mSEE ALSO[0m
+       [1mbzip2[22m(1), [1mgzip[22m(1), [1mtar[22m(1), [1mxz[22m(1)
 
        Precompiled binaries for some platforms are available from the lzop
        home page.
@@ -402,25 +402,24 @@ SSEEEE AALLSSOO
 
            see http://www.oberhumer.com/opensource/lzo/
 
-DDIIAAGGNNOOSSTTIICCSS
+[1mDIAGNOSTICS[0m
        Exit status is normally 0; if an error occurs, exit status is 1. If a
-       warning occurs, exit status is 2 (unless option ----iiggnnoorree--wwaarrnn is in
+       warning occurs, exit status is 2 (unless option [1m--ignore-warn [22mis in
        effect).
 
-       llzzoopp’’ss diagnostics are intended to be self-explanatory.
+       [1mlzop's [22mdiagnostics are intended to be self-explanatory.
 
-BBUUGGSS
+[1mBUGS[0m
        No bugs are known. Please report all problems immediately to the
        author.
 
-AAUUTTHHOORR
+[1mAUTHOR[0m
        Markus Franz Xaver Johannes Oberhumer <markus@oberhumer.com>
        http://www.oberhumer.com/opensource/lzop/
 
-CCOOPPYYRRIIGGHHTT
-       lzop and the LZO library are Copyright (C) 1996, 1997, 1998, 1999,
-       2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 by
-       Markus Franz Xaver Johannes Oberhumer.  All Rights Reserved.
+[1mCOPYRIGHT[0m
+       lzop and the LZO library are Copyright (C) 1996-2017 Markus Franz Xaver
+       Oberhumer <markus@oberhumer.com>.  All Rights Reserved.
 
        lzop and the LZO library are distributed under the terms of the GNU
        General Public License (GPL).
@@ -431,4 +430,4 @@ CCOOPPYYRRIIGGHHTT
 
 
 
-lzop 1.03                         2010-11-06                           LZOP(1)
+lzop 1.04                         2017-08-10                           LZOP(1)

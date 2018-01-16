@@ -2,7 +2,7 @@
 
    This file is part of the lzop file compressor.
 
-   Copyright (C) 1996-2010 Markus Franz Xaver Johannes Oberhumer
+   Copyright (C) 1996-2017 Markus Franz Xaver Johannes Oberhumer
    All Rights Reserved.
 
    lzop and the LZO library are free software; you can redistribute them
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; see the file COPYING.
    If not, write to the Free Software Foundation, Inc.,
-   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
    Markus F.X.J. Oberhumer
    <markus@oberhumer.com>
@@ -233,12 +233,15 @@ void tm2str(char *s, size_t size, const struct tm *tmp)
     assert(size >= 18);
 #if defined(HAVE_SNPRINTF)
     snprintf(s, size, "%04d-%02d-%02d %02d:%02d:%02d",
-#else
-    sprintf(s, "%04d-%02d-%02d %02d:%02d:%02d",
-#endif
             (int) tmp->tm_year + 1900, (int) tmp->tm_mon + 1,
             (int) tmp->tm_mday,
             (int) tmp->tm_hour, (int) tmp->tm_min, (int) tmp->tm_sec);
+#else
+    sprintf(s, "%04d-%02d-%02d %02d:%02d:%02d",
+            (int) tmp->tm_year + 1900, (int) tmp->tm_mon + 1,
+            (int) tmp->tm_mday,
+            (int) tmp->tm_hour, (int) tmp->tm_min, (int) tmp->tm_sec);
+#endif
 }
 #endif
 
@@ -675,7 +678,4 @@ char *maybe_rename_file(const char *original_name)
 #endif
 
 
-/*
-vi:ts=4:et
-*/
-
+/* vim:set ts=4 sw=4 et: */
