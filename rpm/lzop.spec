@@ -3,7 +3,6 @@ Version:        1.04
 Release:        0
 Summary:        The fastest compressor and decompressor around
 License:        GPLv2+
-Group:          Development/Tools
 Source:         lzop-%{version}.tar.gz
 Url:            http://www.lzop.org
 BuildRequires:  autoconf
@@ -26,7 +25,6 @@ lzop was designed with the following goals in mind:
 
 %package doc
 Summary:        LZOP documentation
-Group:          Development/Tools
 Requires:       lzop = %{version}-%{release}
 
 %description doc
@@ -39,16 +37,14 @@ lzop documentation. Man pages and html docs.
 export CPPFLAGS="-I/usr/include/lzo"
 export LDFLAGS="-L%{_libdir}"
 %configure
-%__make %{?jobs:-j%{jobs}}
+%make_build
 
 %install
 %makeinstall
 
-%clean
-%__rm -rf "%{buildroot}"
-
 %files
 %defattr(-,root,root)
+%license COPYING
 %{_bindir}/lzop
 
 %files doc
